@@ -1,3 +1,4 @@
 from django.db import models
 
-# Create your models here.
+class Mymodel(models.Model):
+    modname = models.CharField(max_length=30)
