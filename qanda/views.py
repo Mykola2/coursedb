@@ -18,7 +18,7 @@ def add(request):
         # ИСПРАВИТЬ!!11!
             q.tags.add(tag)
         q.save()
-    return redirect(r'/') # нужен редирект на details нового вопроса
+    #return redirect(r'/') # нужен редирект на details нового вопроса
 
 
 
