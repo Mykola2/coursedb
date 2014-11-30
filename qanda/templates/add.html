@@ -1,0 +1,15 @@
+{% extends base.html %}
+{% block title_block %}
+Запитати
+{% endblock %}
+
+{% block main_content %}
+    <form action="add" method="get">
+
+        <input type="text" name="title">
+        <input type="text" name="content" height="600" width="800"> {# Размеры -  хуйня. подобрать нормальные #}
+        <input type = "text" name = "tags">
+        <input type = "submit" value="Запитати">
+
+    </form>
+{% endblock %}
