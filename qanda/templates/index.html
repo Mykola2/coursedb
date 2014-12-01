@@ -5,9 +5,7 @@
 
 {% block main_content %}
     {% for q in obj_list %}
-        <p>{{ q.title  }}      ({{ q.Answer_set | length }} відповідей) </p> {# Возможно полная хуйня с количесвтом ответов #}
-        {% for t in q.tags_set %}
-            {{ t }},
-            {% endfor %}
+        <p> <a href="details?id={{ q.id }}"> {{ q.title  }} </a>    ({{ q.Answer_set | length }} відповідей)  </p> {# Возможно полная хуйня с количесвтом ответов #}
+
     {% endfor %}
 {% endblock %}

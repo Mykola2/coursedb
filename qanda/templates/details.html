@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title_block %}
+obj.title
+{% endblock %}
+
+{% block main_content %}
+    Запитав %USERNAME%<br>
+    <h3>{{ obj.title }}</h3><br>
+    <i>{{ obj.content }}</i><br>
+    TAGS :
+        {% for t in obj.tags_set %}
+        {{ t }},
+        {% endfor %}
+
+    <form action="add_answer" method="POST">
+    <input type="text" name="content">
+    <input type="submit" value="Додати відповідь">
+    </form>
+
+{% endblock %}

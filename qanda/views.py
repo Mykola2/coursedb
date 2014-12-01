@@ -7,7 +7,7 @@ from datetime import *
 
 def add(request):
     if request.method == 'GET':
-        print(request)
+        # print(request)
         return render_to_response('add.html',  context_instance=RequestContext(request))
     if request.POST:
         q = Question()
@@ -34,4 +34,11 @@ def index(request):
     return render_to_response('index.html', {'obj_list': Question.objects.all()})
 
 def details(request):
-    pass
+    # print(request)
+    if request.method == 'GET':
+        qst = Question.objects.get(id=int(request.GET['id']))
+        return render_to_response('details.html', {'obj': qst},  context_instance=RequestContext(request))
+    if request.method == 'POST':
+        #create answer, add it to qestion
+        # return to the same question's page
+        pass

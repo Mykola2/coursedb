@@ -7,10 +7,10 @@
     <p>this is add.html</p>
     <form action="add" method="post"> {% csrf_token %}
 
-        <input type="text" name="title">
-        <input type="text" name="content" height="600" width="800"> {# Размеры -  хуйня. подобрать нормальные #}
-        <input type = "text" name = "tags">
-        <input type = "submit" value="Запитати">
+        Заголовок : <input type="text" name="title"> <br>
+        Зміст питання : <input type="text" name="content" height="600" width="800"> <br>{# Размеры -  хуйня. подобрать нормальные #}
+        Теги (через кому) : <input type = "text" name = "tags"><br>
+        <input type = "submit" value="Запитати"><br>
 
     </form>
 {% endblock %}
