@@ -17,8 +17,8 @@ class Question(models.Model):
    title = models.TextField()
    content = models.TextField()
    postdate = models.DateField()
-   user_iduser = models.ForeignKey('User', db_column='user_iduser')
-   likes = models.ManyToManyField(User,related_name="question_likes") #???
+   user_iduser = models.ForeignKey('User', db_column='user_iduser', default=0)
+   likes = models.ManyToManyField(User,related_name="question_likes", default=0) #???
    tags = models.ManyToManyField(Tag,related_name="question_tags")
 
 class Answer(models.Model):
