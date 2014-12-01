@@ -10,7 +10,7 @@ class User(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=65)
+    name = models.CharField(max_length=65, unique=True)
 
 
 class Question(models.Model):

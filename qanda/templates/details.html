@@ -9,7 +9,7 @@ obj.title
     <i>{{ obj.content }}</i><br>
     TAGS :
         {% for t in obj.tags.all %}
-        {{ t.name }},
+        <a href="index?search_tag={{ t.id }}" >{{ t.name }}</a>,
         {% endfor %}
 
     <form action="add_answer" method="POST">

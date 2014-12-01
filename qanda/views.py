@@ -30,7 +30,15 @@ def add(request):
 
 
 def index(request):
-    return render_to_response('index.html', {'obj_list': Question.objects.all()})
+    try:
+        st = request.GET['search_tag']
+        olist = Question.objects.filter(tags__id__contains=st)
+    except:
+        olist = Question.objects.all()
+    return render_to_response('index.html', {'obj_list': olist})
+
+
+
 
 def details(request):
     # print(request)
