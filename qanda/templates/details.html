@@ -8,8 +8,8 @@ obj.title
     <h3>{{ obj.title }}</h3><br>
     <i>{{ obj.content }}</i><br>
     TAGS :
-        {% for t in obj.tags_set %}
-        {{ t }},
+        {% for t in obj.tags.all %}
+        {{ t.name }},
         {% endfor %}
 
     <form action="add_answer" method="POST">

@@ -14,18 +14,17 @@ def add(request):
         q.title = request.POST['title']
         q.content = request.POST['content']
         q.postdate = datetime.now()
-        # пользователь который задал  вопрос блеать!
-        # нужно решить вопрос с регой и аутентификацией
+        # add reference to user who's asked the qestion
+        # make normal rega and login bldjad
         q.save()
         tags_list = [Tag(name=t.strip()) for t in request.POST['tags'].split(',')]
         for tag in tags_list:
             tag.save()
-        # тут будет tрабла - дублирующиеся теги будут повторяться
-        # и снова записываться в базу
-        # ИСПРАВИТЬ!!11!
+        # VANGA : repeated tags go to the db anyway
+        # FIX DIS SHIT!!!111
             q.tags.add(tag)
         # q.save()
-    return redirect(r'/') # нужен редирект на details нового вопроса
+    return render_to_response('details.html', {'obj': q})
 
 
 
