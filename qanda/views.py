@@ -17,7 +17,7 @@ def add(request):
         # add reference to user who's asked the qestion
         # make normal rega and login bldjad
         q.save()
-        tags_list = [Tag(name=t.strip()) for t in request.POST['tags'].split(',')]
+        tags_list = [Tag.objects.get_or_create(name=t.strip())[0] for t in request.POST['tags'].split(',')]
         for tag in tags_list:
             tag.save()
         # VANGA : repeated tags go to the db anyway
