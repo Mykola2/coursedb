@@ -1,10 +1,10 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 
 class User(models.Model):
-    login = models.CharField(max_length=145)
-    pwd = models.CharField(max_length=145)
+    username= models.CharField(max_length=145)
+    password = models.CharField(max_length=145)
 
 
 
