@@ -79,10 +79,23 @@ def user_logout(request):
 
 
 def search(request,):
+    def usages(tag:Tag):
+        '''
+        How many times a particular tag was used
+        PROIZVODITELNOST NE NUZHNA
+        '''
+        acc =0
+        for q in Question.objects.all():
+            if tag in list(q.tags.all()):
+                acc+=1
+        return -acc
+
     if request.method == 'GET':
-        tgs = None #Tag.objects.order_by('')
+        tgs = list(Tag.objects.all())
+        tgs.sort(key=lambda t: usages(t))
+
         # take 10 most popular tags
-        return render_to_response('search.html', {'poptags': tgs},  context_instance=RequestContext(request))
+        return render_to_response('search.html', {'poptags': tgs[:5]},  context_instance=RequestContext(request))
     if request.POST:
         qr = request.POST['query']
         olist = Question.objects.filter(Q(title__icontains=qr) | Q(content__icontains=qr))

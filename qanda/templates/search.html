@@ -7,7 +7,10 @@
 
         <form  method="POST">{% csrf_token %}
     <input type="text" name="query">
-
     <input type="submit" value="Пошук!">
+       <br> or see popular tags<br>
+        {% for t in poptags %}
+            <a href="index?search_tag={{ t.id }}" >{{ t.name }}</a>,
+        {% endfor %}
     </form>
 {% endblock %}
