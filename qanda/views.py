@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, render_to_response
 from django.template import RequestContext
 from qanda.models import *
 from datetime import *
-from forms import UserForm
+from qanda.forms import UserForm
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.http import HttpResponseRedirect, HttpResponse
@@ -24,8 +24,6 @@ def add(request):
         tags_list = [Tag.objects.get_or_create(name=t.strip())[0] for t in request.POST['tags'].split(',')]
         for tag in tags_list:
             tag.save()
-        # VANGA : repeated tags go to the db anyway
-        # FIX DIS SHIT!!!111
             q.tags.add(tag)
         # q.save()
     return render_to_response('details.html', {'obj': q})
@@ -43,7 +41,7 @@ def register(request):
             user.save()
             registered = True
         else:
-            print user_form.errors,
+            print (user_form.errors)
     else:
         user_form = UserForm()
 
@@ -67,7 +65,7 @@ def login(request):
             else:
                 return HttpResponse("Your account is disabled.")
         else:
-            print "Invalid login details: {0}, {1}".format(username, password)
+            print ("Invalid login details: {0}, {1}".format(username, password))
             return HttpResponse("Invalid login details supplied.")
 
     else:
@@ -95,6 +93,10 @@ def details(request):
         qst = Question.objects.get(id=int(request.GET['id']))
         return render_to_response('details.html', {'obj': qst},  context_instance=RequestContext(request))
     if request.method == 'POST':
-        #create answer, add it to qestion
-        # return to the same question's page
-        pass
+        qst  = Question.objects.get(id = int( request.POST['qst_id']))
+        cont = request.POST['content']
+
+        ans = Answer(question_idquestion=qst, postdate = datetime.now(), content=cont)
+        ans.save()
+        #TODO: addd user to aNswer!!!
+        return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))

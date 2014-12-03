@@ -24,6 +24,6 @@ class Question(models.Model):
 class Answer(models.Model):
     content = models.TextField()
     postdate = models.DateField()
-    user_iduser = models.ForeignKey('User',db_column='user_iduser')
-    question_idquestion = models.ForeignKey('Question', db_column='question_idquestion')
+    user_iduser = models.ForeignKey('User',db_column='user_iduser', default=0)
+    question_idquestion = models.ForeignKey('Question', db_column='question_idquestion', related_name='answers')
     likes = models.ManyToManyField(User, related_name="answer_likes")
