@@ -8,6 +8,7 @@ from django.contrib.auth import login as auth_login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 def add(request):
     if request.method == 'GET':
@@ -75,6 +76,17 @@ def login(request):
 def user_logout(request):
     logout(request)
     return render_to_response('add.html')
+
+
+def search(request,):
+    if request.method == 'GET':
+        tgs = None #Tag.objects.order_by('')
+        # take 10 most popular tags
+        return render_to_response('search.html', {'poptags': tgs},  context_instance=RequestContext(request))
+    if request.POST:
+        qr = request.POST['query']
+        olist = Question.objects.filter(Q(title__icontains=qr) | Q(content__icontains=qr))
+        return render_to_response('index.html', {'obj_list': olist})
 
 def index(request):
     try:
