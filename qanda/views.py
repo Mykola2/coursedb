@@ -75,7 +75,7 @@ def login(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return render_to_response('add.html')
+    return render_to_response('index.html')
 
 
 def search(request,):
@@ -94,7 +94,7 @@ def index(request):
         olist = Question.objects.filter(tags__id__contains=st)
     except:
         olist = Question.objects.all()
-    return render_to_response('index.html', {'obj_list': olist})
+    return render_to_response('index.html', {'obj_list': olist},  context_instance=RequestContext(request))
 
 
 

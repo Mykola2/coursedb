@@ -9,5 +9,5 @@ urlpatterns = patterns('',
                        url(r'login', 'qanda.views.login'),
                        url(r'logout', 'qanda.views.user_logout'),
                        url(r'restricted', 'qanda.views.restricted'),
-                       url(r'', 'qanda.views.index')
+                       url(r'index', 'qanda.views.index')
                        )

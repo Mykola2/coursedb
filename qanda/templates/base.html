@@ -9,7 +9,12 @@
     </title>
 </head>
 <body>
-<a href="index">Головна</a> | <a href="add">Запитати</a> | <a href="search"> Пошук</a>  | {% if user.is_authenticated %}<a href="logout">Вихід</a> {% else %} <a href="login">Вхід</a> | <a href="register">Реєстрація</a>{% endif %} |
+<a href="index">Головна</a> | <a href="add">Запитати</a> | <a href="search"> Пошук</a>  | {% if user.is_authenticated %}
+                                                                                            <a href="logout">Вихід</a>
+                                                                                            {% else %}
+                                                                                                <a href="login">Вхід</a> |
+                                                                                                <a href="register">Реєстрація</a>
+                                                                                            {% endif %} |
 <p></p>
 {% block main_content %}
 {% endblock %}
