@@ -4,7 +4,7 @@ obj.title
 {% endblock %}
 
 {% block main_content %}
-    Запитав %USERNAME%<br>
+    <h3>{{ obj.user_iduser.username }}<br>
     <h3>{{ obj.title }}</h3><br>
     <i>{{ obj.content }}</i><br>
     TAGS :
@@ -15,7 +15,7 @@ obj.title
 
     <br>ANSWERS( {{ obj.answers.all|length }})
     {% for an in  obj.answers.all %}
-        <br> %USERNAME% : {{ an.content }}
+        <br> {{ an.user_iduser.username }} : {{ an.content }}
     {% endfor %}
 
     <form action="details_add_answer" method="POST">{% csrf_token %}

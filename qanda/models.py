@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class User(models.Model):
-    username= models.CharField(max_length=145)
-    password = models.CharField(max_length=145)
+class User1(User):
+    username1= models.CharField(max_length=145)
+    password1 = models.CharField(max_length=145)
 
 
 
@@ -17,13 +17,13 @@ class Question(models.Model):
    title = models.TextField()
    content = models.TextField()
    postdate = models.DateField()
-   user_iduser = models.ForeignKey('User', db_column='user_iduser', default=0)
-   likes = models.ManyToManyField(User,related_name="question_likes", default=0) #???
+   user_iduser = models.ForeignKey(User)
+   likes = models.ManyToManyField(User1,related_name="question_likes", default=0) #???
    tags = models.ManyToManyField(Tag,related_name="question_tags")
 
 class Answer(models.Model):
     content = models.TextField()
     postdate = models.DateField()
-    user_iduser = models.ForeignKey('User',db_column='user_iduser', default=0)
+    user_iduser = models.ForeignKey(User)
     question_idquestion = models.ForeignKey('Question', db_column='question_idquestion', related_name='answers')
-    likes = models.ManyToManyField(User, related_name="answer_likes")
+    likes = models.ManyToManyField(User1, related_name="answer_likes")

@@ -9,18 +9,19 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-
+from django.contrib.auth.models import User
 def add(request):
     if request.method == 'GET':
         # print(request)
         return render_to_response('add.html',  context_instance=RequestContext(request))
     if request.POST:
         q = Question()
+        user_ = User.objects.get(id=request.user.id)
+        q.user_iduser = user_
         q.title = request.POST['title']
         q.content = request.POST['content']
         q.postdate = datetime.now()
         # add reference to user who's asked the qestion
-        # make normal rega and login bldjad
         q.save()
         tags_list = [Tag.objects.get_or_create(name=t.strip())[0] for t in request.POST['tags'].split(',')]
         for tag in tags_list:
@@ -62,6 +63,7 @@ def login(request):
         if user:
             if user.is_active:
                 auth_login(request, user)
+                request.session['user'] = user.id
                 return HttpResponseRedirect('/')
             else:
                 return HttpResponse("Your account is disabled.")
@@ -70,7 +72,7 @@ def login(request):
             return HttpResponse("Invalid login details supplied.")
 
     else:
-        return render_to_response('login.html', {}, context)
+        return render_to_response('login.html', {}, context_instance=RequestContext(request))
 
 @login_required
 def user_logout(request):
@@ -107,8 +109,9 @@ def details(request):
     if request.method == 'POST':
         qst  = Question.objects.get(id = int( request.POST['qst_id']))
         cont = request.POST['content']
-
-        ans = Answer(question_idquestion=qst, postdate = datetime.now(), content=cont)
+        user_ = User.objects.get(id = request.user.id)
+        print user_.username
+        ans = Answer(user_iduser = user_, question_idquestion=qst, postdate = datetime.now(), content=cont)
         ans.save()
         #TODO: addd user to aNswer!!!
         return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
