@@ -42,10 +42,13 @@ obj.title
         (+{{an.likes.all|length}})
          {% if  user.is_authenticated  %}
              {% if user in  an.likes.all%}
-                  <a href="unlike_ans?ans_id={{ an.id }}&uid={{ user.id }}">Дизлойс<br></a>
+                  <a href="unlike_ans?ans_id={{ an.id }}&uid={{ user.id }}">Дизлойс</a>
                  {% else %}
-                  <a href="like_ans?ans_id={{ an.id }}&uid={{ user.id }}">Лойс<br></a>
+                  <a href="like_ans?ans_id={{ an.id }}&uid={{ user.id }}">Лойс</a>
              {% endif %}
+                {% if an.user_iduser == user %}
+                    <small><a href="delete_ans?id={{ an.id }}">   (✖) </a> </small>
+                 {% endif %}
         {% endif %}
     {% endfor %}
 

@@ -39,6 +39,12 @@ def delete_qst(request,):
     Question.objects.get(id=request.GET['id']).delete()
     return redirect(r'/index')
 
+def delete_ans(request,):
+    an = Answer.objects.get(id=request.GET['id'])
+    q = an.question_idquestion
+    an.delete()
+    return render_to_response('details.html', {'obj': q}, context_instance=RequestContext(request))
+
 def register(request):
     context = RequestContext(request)
     registered = False
