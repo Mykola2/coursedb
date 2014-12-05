@@ -128,14 +128,23 @@ def like_qst(request,):
     user = User.objects.get(id=request.GET['uid'])
     qst = Question.objects.get(id=request.GET['qst_id'])
     qst.likes.add(user)
-    print('calling like')
     return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
 
 def unlike_qst(request,):
     user = User.objects.get(id=request.GET['uid'])
     qst = Question.objects.get(id=request.GET['qst_id'])
     qst.likes.remove(user)
-    print('calling unlike')
-    print(qst.likes.all())
     return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
+
+def like_ans(request,):
+    user = User.objects.get(id=request.GET['uid'])
+    ans = Answer.objects.get(id=request.GET['ans_id'])
+    ans.likes.add(user)
+    return render_to_response('details.html', {'obj': ans.question_idquestion}, context_instance=RequestContext(request))
+
+def unlike_ans(request,):
+    user = User.objects.get(id=request.GET['uid'])
+    ans = Answer.objects.get(id=request.GET['ans_id'])
+    ans.likes.remove(user)
+    return render_to_response('details.html', {'obj': ans.question_idquestion}, context_instance=RequestContext(request))
 

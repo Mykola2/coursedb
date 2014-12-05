@@ -11,5 +11,7 @@ urlpatterns = patterns('',
                        url(r'restricted', 'qanda.views.restricted'),\
                        url(r'unlike_qst', 'qanda.views.unlike_qst'),
                        url(r'like_qst', 'qanda.views.like_qst'),
+                       url(r'unlike_ans', 'qanda.views.unlike_ans'),
+                       url(r'like_ans', 'qanda.views.like_ans'),
                        url(r'', 'qanda.views.index')
                        )

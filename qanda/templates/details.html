@@ -34,21 +34,29 @@ obj.title
 
 
     <br>ANSWERS( {{ obj.answers.all|length }})
-    {% for an in  obj.answers.all %}
+    {% for an in  obj.answers.all|dictsortreversed:"likes.count" %}
         <br> <a href="index?search_by_user={{ an.user_iduser.id }}" > {{ an.user_iduser.username }}</a>, : {{ an.content }}
+        (+{{an.likes.all|length}})
+         {% if  user.is_authenticated  %}
+             {% if user in  an.likes.all%}
+                  <a href="unlike_ans?ans_id={{ an.id }}&uid={{ user.id }}">Дизлойс<br></a>
+                 {% else %}
+                  <a href="like_ans?ans_id={{ an.id }}&uid={{ user.id }}">Лойс<br></a>
+             {% endif %}
+        {% endif %}
     {% endfor %}
-     {% if  user.is_authenticated  %}
 
+
+
+    {% if  user.is_authenticated  %}
     <br>
-
-
     <form action="details_add_answer" method="POST">{% csrf_token %}
     <input type="text" name="content">
         <input type = "hidden" name="qst_id" value="{{ obj.id }}">
     <input type="submit" value="Додати відповідь">
     </form>
     {% else %}
-      Щоб відповідати необхідно    <a href="login">увійти</a>.
+     <br> Щоб відповідати необхідно    <a href="login">увійти</a>.
     {% endif %}
 
 {% endblock %}
