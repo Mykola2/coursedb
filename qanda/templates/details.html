@@ -5,7 +5,25 @@ obj.title
 
 {% block main_content %}
     <a href="index?search_by_user={{ obj.user_iduser.id }}" > {{ obj.user_iduser.username }}</a>,
-    <h3>{{ obj.title }}</h3><br>
+    <h3>{{ obj.title }}(+ {{obj.likes.all|length }})</h3>
+<br>
+
+ {% if  user.is_authenticated  %}
+     {% if user in  obj.likes.all%}
+      <a href="unlike_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Дизлойснути питання<br></a>
+     {% else %}
+      <a href="like_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Лойснути питання<br></a>
+     {% endif %}
+ {% endif %}
+
+      <br>
+
+{#    це питання лойснули#}
+{#    {% for l in  obj.likes.all%}#}
+{#        <small>{{ l.username }}</small>#}
+{#    {% endfor %}#}
+{#    <br>#}
+
     <i>{{ obj.content }}</i><br>
     <br>
 
@@ -19,14 +37,8 @@ obj.title
     {% for an in  obj.answers.all %}
         <br> <a href="index?search_by_user={{ an.user_iduser.id }}" > {{ an.user_iduser.username }}</a>, : {{ an.content }}
     {% endfor %}
-
      {% if  user.is_authenticated  %}
 
-         {% if user in  obj.question_likes%}
-    <a href="unlike_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Дизлойснути питання<br></a>
-   {% else %}
-    <a href="like_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Лойснути питання<br></a>
-     {% endif %}
     <br>
 
 
