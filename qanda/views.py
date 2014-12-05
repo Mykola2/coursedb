@@ -35,6 +35,10 @@ def add(request):
         return render_to_response('login.html', context_instance=RequestContext(request))
 
 
+def delete_qst(request,):
+    Question.objects.get(id=request.GET['id']).delete()
+    return redirect(r'/index')
+
 def register(request):
     context = RequestContext(request)
     registered = False

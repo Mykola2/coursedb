@@ -7,6 +7,9 @@ obj.title
     <a href="index?search_by_user={{ obj.user_iduser.id }}" > {{ obj.user_iduser.username }}</a>,
     <h3>{{ obj.title }}(+ {{obj.likes.all|length }})</h3>
 <br>
+    {% if obj.user_iduser == user %}
+    <small><a href="delete_qst?id={{ obj.id }}">  Видалити питання</a> </small><br>
+    {% endif %}
 
  {% if  user.is_authenticated  %}
      {% if user in  obj.likes.all%}
