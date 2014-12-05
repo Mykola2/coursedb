@@ -9,5 +9,7 @@ urlpatterns = patterns('',
                        url(r'login', 'qanda.views.login'),
                        url(r'logout', 'qanda.views.user_logout'),
                        url(r'restricted', 'qanda.views.restricted'),
+                       url(r'like_qst', 'qanda.views.like_qst'),
+                       url(r'unlike_qst', 'qanda.views.unlike_qst'),
                        url(r'', 'qanda.views.index')
                        )

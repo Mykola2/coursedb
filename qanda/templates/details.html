@@ -7,6 +7,8 @@ obj.title
     <a href="index?search_by_user={{ obj.user_iduser.id }}" > {{ obj.user_iduser.username }}</a>,
     <h3>{{ obj.title }}</h3><br>
     <i>{{ obj.content }}</i><br>
+    <br>
+
     TAGS :
         {% for t in obj.tags.all %}
         <a href="index?search_tag={{ t.id }}" >{{ t.name }}</a>,
@@ -19,6 +21,15 @@ obj.title
     {% endfor %}
 
      {% if  user.is_authenticated  %}
+
+         {% if user in  obj.question_likes%}
+    <a href="unlike_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Дизлойснути питання<br></a>
+   {% else %}
+    <a href="like_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Лойснути питання<br></a>
+     {% endif %}
+    <br>
+
+
     <form action="details_add_answer" method="POST">{% csrf_token %}
     <input type="text" name="content">
         <input type = "hidden" name="qst_id" value="{{ obj.id }}">

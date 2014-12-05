@@ -122,3 +122,17 @@ def details(request):
             return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
     else:
         return render_to_response('login.html',context_instance=RequestContext(request))
+
+
+def like_qst(request,):
+    user = User.objects.get(id=request.GET['uid'])
+    qst = Question.objects.get(id=request.GET['qst_id'])
+    qst.likes.add(user)
+    return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
+
+def unlike_qst(request,):
+    user = User.objects.get(id=request.GET['uid'])
+    qst = Question.objects.get(id=request.GET['qst_id'])
+    qst.likes.remove(user)
+    return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
+
