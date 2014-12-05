@@ -30,9 +30,9 @@ def add(request):
                 tag.save()
                 q.tags.add(tag)
             # q.save()
-        return render_to_response('details.html', {'obj': q},context_instance=RequestContext(request))
+        return render_to_response('details.html', {'obj': q}, context_instance=RequestContext(request))
     else:
-        return render_to_response('login.html',context_instance=RequestContext(request))
+        return render_to_response('login.html', context_instance=RequestContext(request))
 
 
 def register(request):
@@ -58,7 +58,6 @@ def register(request):
 
 def login(request):
     context = RequestContext(request)
-
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -99,7 +98,6 @@ def index(request):
     if request.GET.get('search_tag'):
         st = request.GET['search_tag']
         olist = Question.objects.filter(tags__id__contains=st)
-
     if request.GET.get('search_by_user'):
         su = request.GET['search_by_user']
         olist = Question.objects.filter(user_iduser = su)
@@ -124,3 +122,17 @@ def details(request):
             return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
     else:
         return render_to_response('login.html',context_instance=RequestContext(request))
+
+
+def like_qst(request,):
+    user = User.objects.get(id=request.GET['uid'])
+    qst = Question.objects.get(id=request.GET['qst_id'])
+    qst.likes.add(user)
+    return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
+
+def unlike_qst(request,):
+    user = User.objects.get(id=request.GET['uid'])
+    qst = Question.objects.get(id=request.GET['qst_id'])
+    qst.likes.remove(user)
+    return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
+
