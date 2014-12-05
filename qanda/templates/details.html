@@ -16,12 +16,18 @@ obj.title
     <br>ANSWERS( {{ obj.answers.all|length }})
     {% for an in  obj.answers.all %}
         <br> {{ an.user_iduser.username }} : {{ an.content }}
+         {% if user.is_authenticated %}
+        {% endif %}
     {% endfor %}
 
+     {% if user.is_authenticated %}
     <form action="details_add_answer" method="POST">{% csrf_token %}
     <input type="text" name="content">
         <input type = "hidden" name="qst_id" value="{{ obj.id }}">
     <input type="submit" value="Додати відповідь">
     </form>
+         {% else %}
+         <br> Щоб відповідати необхідо <a href="login.html">увійти</a>
+    {% endif %}
 
 {% endblock %}
