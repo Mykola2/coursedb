@@ -10,25 +10,29 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth.models import User
+
 def add(request):
-    if request.method == 'GET':
-        # print(request)
-        return render_to_response('add.html',  context_instance=RequestContext(request))
-    if request.POST:
-        q = Question()
-        user_ = User.objects.get(id=request.user.id)
-        q.user_iduser = user_
-        q.title = request.POST['title']
-        q.content = request.POST['content']
-        q.postdate = datetime.now()
-        # add reference to user who's asked the qestion
-        q.save()
-        tags_list = [Tag.objects.get_or_create(name=t.strip())[0] for t in request.POST['tags'].split(',')]
-        for tag in tags_list:
-            tag.save()
-            q.tags.add(tag)
-        # q.save()
-    return render_to_response('details.html', {'obj': q},context_instance=RequestContext(request))
+    if request.user.is_authenticated():
+        if request.method == 'GET':
+            # print(request)
+            return render_to_response('add.html',  context_instance=RequestContext(request))
+        if request.POST:
+            q = Question()
+            user_ = User.objects.get(id=request.user.id)
+            q.user_iduser = user_
+            q.title = request.POST['title']
+            q.content = request.POST['content']
+            q.postdate = datetime.now()
+            # add reference to user who's asked the qestion
+            q.save()
+            tags_list = [Tag.objects.get_or_create(name=t.strip())[0] for t in request.POST['tags'].split(',')]
+            for tag in tags_list:
+                tag.save()
+                q.tags.add(tag)
+            # q.save()
+        return render_to_response('details.html', {'obj': q},context_instance=RequestContext(request))
+    else:
+        return render_to_response('login.html',context_instance=RequestContext(request))
 
 
 def register(request):
@@ -91,11 +95,14 @@ def search(request,):
         return render_to_response('index.html', {'obj_list': olist})
 
 def index(request):
-    try:
+    olist = Question.objects.all()
+    if request.GET.get('search_tag'):
         st = request.GET['search_tag']
         olist = Question.objects.filter(tags__id__contains=st)
-    except:
-        olist = Question.objects.all()
+
+    if request.GET.get('search_by_user'):
+        su = request.GET['search_by_user']
+        olist = Question.objects.filter(user_iduser = su)
     return render_to_response('index.html', {'obj_list': olist},  context_instance=RequestContext(request))
 
 
@@ -106,11 +113,14 @@ def details(request):
     if request.method == 'GET':
         qst = Question.objects.get(id=int(request.GET['id']))
         return render_to_response('details.html', {'obj': qst},  context_instance=RequestContext(request))
-    if request.method == 'POST':
-        qst  = Question.objects.get(id = int( request.POST['qst_id']))
-        cont = request.POST['content']
-        user_ = User.objects.get(id = request.user.id)
-        print( user_.username)
-        ans = Answer(user_iduser = user_, question_idquestion=qst, postdate = datetime.now(), content=cont)
-        ans.save()
-        return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
+    if request.user.is_authenticated():
+        if request.method == 'POST':
+            qst  = Question.objects.get(id = int( request.POST['qst_id']))
+            cont = request.POST['content']
+            user_ = User.objects.get(id = request.user.id)
+            print( user_.username)
+            ans = Answer(user_iduser = user_, question_idquestion=qst, postdate = datetime.now(), content=cont)
+            ans.save()
+            return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
+    else:
+        return render_to_response('login.html',context_instance=RequestContext(request))
