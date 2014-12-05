@@ -28,7 +28,7 @@ def add(request):
             tag.save()
             q.tags.add(tag)
         # q.save()
-    return render_to_response('details.html', {'obj': q})
+    return render_to_response('details.html', {'obj': q},context_instance=RequestContext(request))
 
 
 def register(request):
@@ -43,7 +43,7 @@ def register(request):
             user.save()
             registered = True
         else:
-            print (user_form.errors)
+            print(user_form.errors)
     else:
         user_form = UserForm()
 
@@ -110,8 +110,7 @@ def details(request):
         qst  = Question.objects.get(id = int( request.POST['qst_id']))
         cont = request.POST['content']
         user_ = User.objects.get(id = request.user.id)
-        print user_.username
+        print( user_.username)
         ans = Answer(user_iduser = user_, question_idquestion=qst, postdate = datetime.now(), content=cont)
         ans.save()
-        #TODO: addd user to aNswer!!!
         return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
