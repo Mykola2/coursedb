@@ -4,7 +4,7 @@ obj.title
 {% endblock %}
 
 {% block main_content %}
-    <h3>{{ obj.user_iduser.username }}<br>
+    <a href="index?search_by_user={{ obj.user_iduser.id }}" > {{ obj.user_iduser.username }}</a>,
     <h3>{{ obj.title }}</h3><br>
     <i>{{ obj.content }}</i><br>
     TAGS :
@@ -15,7 +15,7 @@ obj.title
 
     <br>ANSWERS( {{ obj.answers.all|length }})
     {% for an in  obj.answers.all %}
-        <br> {{ an.user_iduser.username }} : {{ an.content }}
+        <br> <a href="index?search_by_user={{ an.user_iduser.id }}" > {{ an.user_iduser.username }}</a>, : {{ an.content }}
     {% endfor %}
 
     <form action="details_add_answer" method="POST">{% csrf_token %}

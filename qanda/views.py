@@ -10,6 +10,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth.models import User
+
 def add(request):
     if request.method == 'GET':
         # print(request)
@@ -91,11 +92,14 @@ def search(request,):
         return render_to_response('index.html', {'obj_list': olist})
 
 def index(request):
-    try:
+    olist = Question.objects.all()
+    if request.GET.get('search_tag'):
         st = request.GET['search_tag']
         olist = Question.objects.filter(tags__id__contains=st)
-    except:
-        olist = Question.objects.all()
+
+    if request.GET.get('search_by_user'):
+        su = request.GET['search_by_user']
+        olist = Question.objects.filter(user_iduser = su)
     return render_to_response('index.html', {'obj_list': olist},  context_instance=RequestContext(request))
 
 
