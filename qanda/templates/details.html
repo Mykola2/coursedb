@@ -18,10 +18,14 @@ obj.title
         <br> <a href="index?search_by_user={{ an.user_iduser.id }}" > {{ an.user_iduser.username }}</a>, : {{ an.content }}
     {% endfor %}
 
+     {% if if user.is_authenticated  %}
     <form action="details_add_answer" method="POST">{% csrf_token %}
     <input type="text" name="content">
         <input type = "hidden" name="qst_id" value="{{ obj.id }}">
     <input type="submit" value="Додати відповідь">
     </form>
+    {% else %}
+      Щоб відповідати необхідно    <a href="login">увійти</a>.
+    {% endif %}
 
 {% endblock %}
