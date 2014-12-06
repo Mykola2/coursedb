@@ -158,3 +158,15 @@ def unlike_ans(request,):
     ans.likes.remove(user)
     return render_to_response('details.html', {'obj': ans.question_idquestion}, context_instance=RequestContext(request))
 
+def chart1(request,):
+    tgs = list(Tag.objects.all())
+    tgs.sort(key=lambda t: -t.question_tags.count())
+    tvals = [[t.name, t.question_tags.count()]for t in tgs[:20]]
+    ans, unans = 0, 0
+    for q in Question.objects.all():
+        if q.answers.count() > 1:
+            ans+=1
+        else:
+            unans+=1
+    aua = [['answered', ans], ['unanswered', unans]]
+    return render_to_response('chart1.html', {'taginfo': tvals, 'aua':aua}, context_instance=RequestContext(request))

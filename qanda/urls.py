@@ -14,5 +14,6 @@ urlpatterns = patterns('',
                        url(r'like_qst', 'qanda.views.like_qst'),
                        url(r'unlike_ans', 'qanda.views.unlike_ans'),
                        url(r'like_ans', 'qanda.views.like_ans'),
+                       url(r'chart1', 'qanda.views.chart1'),
                        url(r'', 'qanda.views.index')
                        )
