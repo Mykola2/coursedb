@@ -35,6 +35,16 @@ def add(request):
         return render_to_response('login.html', context_instance=RequestContext(request))
 
 
+def delete_qst(request,):
+    Question.objects.get(id=request.GET['id']).delete()
+    return redirect(r'/index')
+
+def delete_ans(request,):
+    an = Answer.objects.get(id=request.GET['id'])
+    q = an.question_idquestion
+    an.delete()
+    return render_to_response('details.html', {'obj': q}, context_instance=RequestContext(request))
+
 def register(request):
     context = RequestContext(request)
     registered = False
@@ -136,3 +146,27 @@ def unlike_qst(request,):
     qst.likes.remove(user)
     return render_to_response('details.html', {'obj': qst}, context_instance=RequestContext(request))
 
+def like_ans(request,):
+    user = User.objects.get(id=request.GET['uid'])
+    ans = Answer.objects.get(id=request.GET['ans_id'])
+    ans.likes.add(user)
+    return render_to_response('details.html', {'obj': ans.question_idquestion}, context_instance=RequestContext(request))
+
+def unlike_ans(request,):
+    user = User.objects.get(id=request.GET['uid'])
+    ans = Answer.objects.get(id=request.GET['ans_id'])
+    ans.likes.remove(user)
+    return render_to_response('details.html', {'obj': ans.question_idquestion}, context_instance=RequestContext(request))
+
+def chart1(request,):
+    tgs = list(Tag.objects.all())
+    tgs.sort(key=lambda t: -t.question_tags.count())
+    tvals = [[t.name, t.question_tags.count()]for t in tgs[:20]]
+    ans, unans = 0, 0
+    for q in Question.objects.all():
+        if q.answers.count() > 1:
+            ans+=1
+        else:
+            unans+=1
+    aua = [['answered', ans], ['unanswered', unans]]
+    return render_to_response('chart1.html', {'taginfo': tvals, 'aua':aua}, context_instance=RequestContext(request))

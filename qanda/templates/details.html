@@ -5,7 +5,28 @@ obj.title
 
 {% block main_content %}
     <a href="index?search_by_user={{ obj.user_iduser.id }}" > {{ obj.user_iduser.username }}</a>,
-    <h3>{{ obj.title }}</h3><br>
+    <h3>{{ obj.title }}(+ {{obj.likes.all|length }})</h3>
+<br>
+    {% if obj.user_iduser == user %}
+    <small><a href="delete_qst?id={{ obj.id }}">  Видалити питання</a> </small><br>
+    {% endif %}
+
+ {% if  user.is_authenticated  %}
+     {% if user in  obj.likes.all%}
+      <a href="unlike_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Дизлойснути питання<br></a>
+     {% else %}
+      <a href="like_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Лойснути питання<br></a>
+     {% endif %}
+ {% endif %}
+
+      <br>
+
+{#    це питання лойснули#}
+{#    {% for l in  obj.likes.all%}#}
+{#        <small>{{ l.username }}</small>#}
+{#    {% endfor %}#}
+{#    <br>#}
+
     <i>{{ obj.content }}</i><br>
     <br>
 
@@ -16,27 +37,32 @@ obj.title
 
 
     <br>ANSWERS( {{ obj.answers.all|length }})
-    {% for an in  obj.answers.all %}
+    {% for an in  obj.answers.all|dictsortreversed:"likes.count" %}
         <br> <a href="index?search_by_user={{ an.user_iduser.id }}" > {{ an.user_iduser.username }}</a>, : {{ an.content }}
+        (+{{an.likes.all|length}})
+         {% if  user.is_authenticated  %}
+             {% if user in  an.likes.all%}
+                  <a href="unlike_ans?ans_id={{ an.id }}&uid={{ user.id }}">Дизлойс</a>
+                 {% else %}
+                  <a href="like_ans?ans_id={{ an.id }}&uid={{ user.id }}">Лойс</a>
+             {% endif %}
+                {% if an.user_iduser == user %}
+                    <small><a href="delete_ans?id={{ an.id }}">   (✖) </a> </small>
+                 {% endif %}
+        {% endif %}
     {% endfor %}
 
-     {% if  user.is_authenticated  %}
 
-         {% if user in  obj.question_likes%}
-    <a href="unlike_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Дизлойснути питання<br></a>
-   {% else %}
-    <a href="like_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Лойснути питання<br></a>
-     {% endif %}
+
+    {% if  user.is_authenticated  %}
     <br>
-
-
     <form action="details_add_answer" method="POST">{% csrf_token %}
     <input type="text" name="content">
         <input type = "hidden" name="qst_id" value="{{ obj.id }}">
     <input type="submit" value="Додати відповідь">
     </form>
     {% else %}
-      Щоб відповідати необхідно    <a href="login">увійти</a>.
+     <br> Щоб відповідати необхідно    <a href="login">увійти</a>.
     {% endif %}
 
 {% endblock %}

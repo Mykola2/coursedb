@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title_block %}
+- Інфографіка
+{% endblock %}
+
+{% block main_content %}
+<div id="auachart"></div>
+<div id="tagchart"></div>
+{% load googlecharts %}
+{% googlecharts %}
+    {%  data aua "info"%}
+        {% col "string" "Status"%}'{{ val }}' {% endcol %}
+        {% col "number" "Persentage"%}{{ val }} {% endcol %}
+    {% enddata %}
+
+    {%  data taginfo "info2"%}
+        {% col "string" "Name"%}'{{ val }}' {% endcol %}
+        {% col "number" "Count"%}{{ val }} {% endcol %}
+    {% enddata %}
+
+    {% options "pie"%}
+        kind : "PieChart"
+    {% endoptions %}
+
+    {% options "col"%}
+        kind : "ColumnChart"
+    {% endoptions %}
+
+    {% graph "auachart" "info" "pie"%}
+    {% graph "tagchart" "info2" "col"%}
+{% endgooglecharts %}
+{% endblock %}
