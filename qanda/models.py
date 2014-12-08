@@ -18,7 +18,7 @@ class Question(models.Model):
    content = models.TextField()
    postdate = models.DateField()
    user_iduser = models.ForeignKey(User)
-   likes = models.ManyToManyField(User,related_name="question_likes", default=0) #???
+   likes = models.ManyToManyField(User,related_name="question_likes") #???
    tags = models.ManyToManyField(Tag,related_name="question_tags")
 
 class Answer(models.Model):
