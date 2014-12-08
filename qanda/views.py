@@ -165,9 +165,10 @@ def chart1(request,):
     tvals = [[t.name, t.question_tags.count()]for t in tgs[:20]]
     ans, unans = 0, 0
     for q in Question.objects.all():
-        if q.answers.count() > 1:
+        if q.answers.count() > 0:
             ans+=1
         else:
             unans+=1
     aua = [['answered', ans], ['unanswered', unans]]
+    print(aua)
     return render_to_response('chart1.html', {'taginfo': tvals, 'aua':aua}, context_instance=RequestContext(request))
