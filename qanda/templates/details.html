@@ -7,6 +7,7 @@ obj.title
     <a href="index?search_by_user={{ obj.user_iduser.id }}" > {{ obj.user_iduser.username }}</a>,
     <h3>{{ obj.title }}(+ {{obj.likes.all|length }})</h3>
 <br>
+    posted on [{{ obj.postdate }}] <br>
     {% if obj.user_iduser == user %}
     <small><a href="delete_qst?id={{ obj.id }}">  Видалити питання</a> </small><br>
     {% endif %}
@@ -38,7 +39,7 @@ obj.title
 
     <br>ANSWERS( {{ obj.answers.all|length }})
     {% for an in  obj.answers.all|dictsortreversed:"likes.count" %}
-        <br> <a href="index?search_by_user={{ an.user_iduser.id }}" > {{ an.user_iduser.username }}</a>, : {{ an.content }}
+        <br> <a href="index?search_by_user={{ an.user_iduser.id }}" > {{ an.user_iduser.username }}</a>, : [{{ an.postdate }}] {{ an.content }}
         (+{{an.likes.all|length}})
          {% if  user.is_authenticated  %}
              {% if user in  an.likes.all%}

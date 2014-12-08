@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth.models import User
 
+
 def add(request):
     if request.user.is_authenticated():
         if request.method == 'GET':
