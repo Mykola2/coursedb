@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title_block %}
-obj.title
+{{ obj.title}}
 {% endblock %}
 
 {% block main_content %}
@@ -8,9 +8,10 @@ obj.title
                 <link itemprop="image" href="//cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
                 <div id="question-header">
                     <h1 itemprop="name">
-                        <!-- Question title --><a href="" class="question-hyperlink">error: cannot find symbol method GetApplicationContext()</a>
+                        <!-- Question title --><a href="" class="question-hyperlink">{{ obj.title}}</a>
                     </h1>
                 </div>
+
                 <div id="mainbar">
 
                     <div class="question" data-questionid="27363339" id="question">
@@ -21,10 +22,15 @@ obj.title
 
                                         <div class="vote">
                                             <input type="hidden" name="_id_" value="27363339">
-                                            <!-- Vote up > --><a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
-                                            <!-- Votes > --><span itemprop="upvoteCount" class="vote-count-post ">0</span>
-                                            <!-- Vote down > --><a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
 
+                                             <!-- Votes > --><span itemprop="upvoteCount" class="vote-count-post ">{{obj.likes.all|length }}</span>
+                                            {% if  user.is_authenticated  %}
+                                             {% if user in  obj.likes.all%}
+                                              <a href="unlike_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Дизлойc<br></a>
+                                             {% else %}
+                                              <a href="like_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Лойс<br></a>
+                                             {% endif %}
+                                        {% endif %}
                                             <div class="favoritecount"> <b></b>
                                             </div>
 
@@ -36,23 +42,20 @@ obj.title
                                         <div>
                                             <div class="post-text" itemprop="text">
                                                 <!-- Question text -->
-                                                <p>
-                                                    I had this error: "error: cannot find symbol method GetApplicationContext()" when I'm creating Fragments for Android app.
-                                                </p>
-
-                                                <p></p>
-                                                <pre class="default prettyprint prettyprinted"><span class="kwd">public</span><span class="pln"></span><span class="kwd">class</span><span class="pln"></span><span class="typ">MainActivity</span><span class="pln"></span><span class="kwd">extends</span><span class="pln"></span><span class="typ">Activity</span><span class="pln"></span><span class="pun">{</span><p></p><span class="pln"></span><code><span class="lit">@Override</span><span class="pln"></span><span class="kwd">protected</span><span class="pln"></span><span class="kwd">void</span><span class="pln">onCreate</span><span class="pun">(</span><span class="typ">Bundle</span><span class="pln">savedInstanceState</span><span class="pun">)</span><span class="pln"></span><span class="pun">{</span><span class="pln"></span><span class="kwd">super</span><span class="pun">.</span><span class="pln">onCreate</span><span class="pun">(</span><span class="pln">savedInstanceState</span><span class="pun">);</span><span class="pln">setContentView</span><span class="pun">(</span><span class="pln">R</span><span class="pun">.</span><span class="pln">layout</span><span class="pun">.</span><span class="pln">activity_main</span><span class="pun">);</span><span class="pln"></span><span class="pun">}</span><span class="pln"></span><span class="kwd">public</span><span class="pln"></span><span class="kwd">void</span><span class="pln">simple</span><span class="pun">(</span><span class="typ">View</span><span class="pln">v</span><span class="pun">){</span><span class="pln"></span><span class="typ">Intent</span><span class="pln">intent </span><span class="pun">=</span><span class="pln"></span><span class="kwd">new</span><span class="pln"></span><span class="typ">Intent</span><span class="pun">(</span><span class="pln">intent</span><span class="pun">.</span><span class="typ">GetApplicationContext</span><span class="pun">(),</span><span class="pln"></span><span class="typ">SimpleFragmentActivity</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">startActivity</span><span class="pun">(</span><span class="pln">intent</span><span class="pun">);</span><span class="pln"></span><span class="pun">}</span></code></pre>
-
-                                                <p>}</p>
-
-                                                <p></p>
+                                                        {{ obj.content }}
                                                 <!-- Question text end -->
                                             </div>
                                             <div class="post-taglist">
                                                 <!-- Tags -->
-                                                <a href="" class="post-tag js-gps-track" title="" rel="tag">android</a>
-                                                <a href="" class="post-tag js-gps-track" title="" rel="tag">cannot-find-symbol</a>
+                                                 {% for t in obj.tags.all %}
+                                                <a href="index?search_tag={{ t.id }}" class="post-tag" title="" rel="tag">{{ t.name }}</a>
+                                                {% endfor %}
                                                 <!-- Tags end -->
+                                            </div>
+                                                <div>
+                                                    {% if obj.user_iduser == user %}
+                                                    <small><a href="delete_qst?id={{ obj.id }}">  Видалити питання</a> </small><br>
+                                                    {% endif %}
                                             </div>
                                             <table class="fw">
                                                 <tbody>
@@ -65,7 +68,7 @@ obj.title
                                                             <div class="user-info ">
                                                                 <div class="user-action-time">
                                                                     asked
-                                                                    <span title="2014-12-08 17:20:06Z" class="relativetime">3 mins ago</span>
+                                                                    <span title="2014-12-08 17:20:06Z" class="relativetime">{{ obj.postdate }}</span>
                                                                 </div>
                                                                 <div class="user-gravatar32">
                                                                     <a href="link_to_user">
@@ -74,9 +77,9 @@ obj.title
                                                                     </a>
                                                                 </div>
                                                                 <div class="user-details">
-                                                                    <!-- Username and link --><a href="link_to_user">robigroza</a>
+                                                                    <!-- Username and link --><a href="index?search_by_user={{ obj.user_iduser.id }}">{{ obj.user_iduser.username }}</a>
                                                                     <br>
-                                                                    <span class="reputation-score" title="reputation score " dir="ltr">1</span>
+
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -106,13 +109,14 @@ obj.title
                         <div id="answers-header">
                             <div class="subheader answers-subheader">
                                 <h2>
-                                    1 Answer
+                                    {{obj.likes.all|length }} Відповідей
                                     <span style="display:none;" itemprop="answerCount">1</span>
                                 </h2>
                             </div>
                         </div>
 
                         <!-- Iterable item -->
+                        {% for an in  obj.answers.all|dictsortreversed:"likes.count" %}
                         <div class="answer" itemscope="">
                             <table>
                                 <tbody>
@@ -120,19 +124,25 @@ obj.title
                                         <td class="votecell">
 
                                             <div class="vote">
-                                                <!-- Vote up > --><a class="vote-up-off" title="This answer is useful">up vote</a>
-                                                <!-- Votes > --><span itemprop="upvoteCount" class="vote-count-post ">0</span>
-                                                <!-- Vote down > --><a class="vote-down-off" title="This answer is not useful">down vote</a>
+                                                <!-- Votes > --><span itemprop="upvoteCount" class="vote-count-post ">{{an.likes.all|length}}</span>
+                                                  {% if  user.is_authenticated  %}
+                                                 {% if user in  an.likes.all%}
+                                                      <a href="unlike_ans?ans_id={{ an.id }}&uid={{ user.id }}">Дизлойс</a>
+                                                     {% else %}
+                                                      <a href="like_ans?ans_id={{ an.id }}&uid={{ user.id }}">Лойс</a>
+                                                 {% endif %}
+                                            {% endif %}
                                             </div>
                                         </td>
 
                                         <td class="answercell">
                                             <div class="post-text" itemprop="text">
-                                                <pre class="default prettyprint prettyprinted"><code><span class="pln">intent</span><span class="pun">.</span><span class="typ">GetApplicationContext</span><span class="pun">()</span></code></pre>
-                                                <p>
-                                                    <code>getApplicationContext</code>
-                                                    is not a method of the Intent class but of context.
-                                                </p>
+                                                {{ an.content }}
+                                            </div>
+                                            <div>
+                                                                {% if an.user_iduser == user %}
+                                                                <small><a href="delete_ans?id={{ an.id }}">   (✖) </a> </small>
+                                                             {% endif %}
                                             </div>
                                             <table class="fw">
                                                 <tbody>
@@ -145,30 +155,30 @@ obj.title
                                                             <div class="user-info user-hover">
                                                                 <div class="user-action-time">
                                                                     answered
-                                                                    <span title="2014-12-08 17:21:40Z" class="relativetime">1 min ago</span>
+                                                                    <span title="2014-12-08 17:21:40Z" class="relativetime">{{ an.postdate }}</span>
                                                                 </div>
                                                                 <div class="user-gravatar32">
-                                                                    <a href="link_to_user">
+                                                                    <a href="index?search_by_user={{ an.user_iduser.id }}" >
                                                                         <div class="gravatar-wrapper-32">
                                                                             <img src="path_to_user_avatar.jpg" alt="" width="32" height="32"></div>
                                                                     </a>
                                                                 </div>
                                                                 <div class="user-details">
-                                                                    <!-- Username and link > --><a href="link_to_user">Blackbelt</a>
+                                                                    <!-- Username and link > --><a href="index?search_by_user={{ an.user_iduser.id }}" > {{ an.user_iduser.username }}</a>
                                                                     <br>
-                                                                    <span class="reputation-score" title="reputation score 48449" dir="ltr">48.4k</span>
-                                                                    <span title="10 gold badges">
-                                                                        <span class="badge1"></span>
-                                                                        <span class="badgecount">10</span>
-                                                                    </span>
-                                                                    <span title="50 silver badges">
-                                                                        <span class="badge2"></span>
-                                                                        <span class="badgecount">50</span>
-                                                                    </span>
-                                                                    <span title="93 bronze badges">
-                                                                        <span class="badge3"></span>
-                                                                        <span class="badgecount">93</span>
-                                                                    </span>
+{#                                                                    <span class="reputation-score" title="reputation score 48449" dir="ltr">48.4k</span>#}
+{#                                                                    <span title="10 gold badges">#}
+{#                                                                        <span class="badge1"></span>#}
+{#                                                                        <span class="badgecount">10</span>#}
+{#                                                                    </span>#}
+{#                                                                    <span title="50 silver badges">#}
+{#                                                                        <span class="badge2"></span>#}
+{#                                                                        <span class="badgecount">50</span>#}
+{#                                                                    </span>#}
+{#                                                                    <span title="93 bronze badges">#}
+{#                                                                        <span class="badge3"></span>#}
+{#                                                                        <span class="badgecount">93</span>#}
+{#                                                                    </span>#}
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -189,6 +199,7 @@ obj.title
                                 </tbody>
                             </table>
                         </div>
+                        {% endfor %}
 
                         <a name="new-answer"></a>
                         <!-- Enter "action" > --><form id="post-form" action="link_to_executor" method="post" class="post-form">
@@ -212,72 +223,72 @@ obj.title
 {% endblock %}
 
 
-{% extends "base.html" %}
-{% block title_block %}
-obj.title
-{% endblock %}
-
-{% block main_content %}
-    <a href="index?search_by_user={{ obj.user_iduser.id }}" > {{ obj.user_iduser.username }}</a>,
-    <h3>{{ obj.title }}(+ {{obj.likes.all|length }})</h3>
-<br>
-    posted on [{{ obj.postdate }}] <br>
-    {% if obj.user_iduser == user %}
-    <small><a href="delete_qst?id={{ obj.id }}">  Видалити питання</a> </small><br>
-    {% endif %}
-
- {% if  user.is_authenticated  %}
-     {% if user in  obj.likes.all%}
-      <a href="unlike_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Дизлойснути питання<br></a>
-     {% else %}
-      <a href="like_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Лойснути питання<br></a>
-     {% endif %}
- {% endif %}
-
-      <br>
-
+{#{% extends "base.html" %}#}
+{#{% block title_block %}#}
+{#obj.title#}
+{#{% endblock %}#}
+{##}
+{#{% block main_content %}#}
+{#    <a href="index?search_by_user={{ obj.user_iduser.id }}" > {{ obj.user_iduser.username }}</a>,#}
+{#    <h3>{{ obj.title }}(+ {{obj.likes.all|length }})</h3>#}
+{#<br>#}
+{#    posted on [{{ obj.postdate }}] <br>#}
+{#    {% if obj.user_iduser == user %}#}
+{#    <small><a href="delete_qst?id={{ obj.id }}">  Видалити питання</a> </small><br>#}
+{#    {% endif %}#}
+{##}
+{# {% if  user.is_authenticated  %}#}
+{#     {% if user in  obj.likes.all%}#}
+{#      <a href="unlike_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Дизлойснути питання<br></a>#}
+{#     {% else %}#}
+{#      <a href="like_qst?qst_id={{ obj.id }}&uid={{ user.id }}">Лойснути питання<br></a>#}
+{#     {% endif %}#}
+{# {% endif %}#}
+{##}
+{#      <br>#}
+{##}
 {#    це питання лойснули#}
 {#    {% for l in  obj.likes.all%}#}
 {#        <small>{{ l.username }}</small>#}
 {#    {% endfor %}#}
 {#    <br>#}
-
-    <i>{{ obj.content }}</i><br>
-    <br>
-
-    TAGS :
-        {% for t in obj.tags.all %}
-        <a href="index?search_tag={{ t.id }}" >{{ t.name }}</a>,
-        {% endfor %}
-
-
-    <br>ANSWERS( {{ obj.answers.all|length }})
-    {% for an in  obj.answers.all|dictsortreversed:"likes.count" %}
-        <br> <a href="index?search_by_user={{ an.user_iduser.id }}" > {{ an.user_iduser.username }}</a>, : [{{ an.postdate }}] {{ an.content }}
-        (+{{an.likes.all|length}})
-         {% if  user.is_authenticated  %}
-             {% if user in  an.likes.all%}
-                  <a href="unlike_ans?ans_id={{ an.id }}&uid={{ user.id }}">Дизлойс</a>
-                 {% else %}
-                  <a href="like_ans?ans_id={{ an.id }}&uid={{ user.id }}">Лойс</a>
-             {% endif %}
-                {% if an.user_iduser == user %}
-                    <small><a href="delete_ans?id={{ an.id }}">   (✖) </a> </small>
-                 {% endif %}
-        {% endif %}
-    {% endfor %}
-
-
-
-    {% if  user.is_authenticated  %}
-    <br>
-    <form action="details_add_answer" method="POST">{% csrf_token %}
-    <input type="text" name="content">
-        <input type = "hidden" name="qst_id" value="{{ obj.id }}">
-    <input type="submit" value="Додати відповідь">
-    </form>
-    {% else %}
-     <br> Щоб відповідати необхідно    <a href="login">увійти</a>.
-    {% endif %}
-
-{% endblock %}
+{##}
+{#    <i>{{ obj.content }}</i><br>#}
+{#    <br>#}
+{##}
+{#    TAGS :#}
+{#        {% for t in obj.tags.all %}#}
+{#        <a href="index?search_tag={{ t.id }}" >{{ t.name }}</a>,#}
+{#        {% endfor %}#}
+{##}
+{##}
+{#    <br>ANSWERS( {{ obj.answers.all|length }})#}
+{#    {% for an in  obj.answers.all|dictsortreversed:"likes.count" %}#}
+{#        <br> <a href="index?search_by_user={{ an.user_iduser.id }}" > {{ an.user_iduser.username }}</a>, : [{{ an.postdate }}] {{ an.content }}#}
+{#        (+{{an.likes.all|length}})#}
+{#         {% if  user.is_authenticated  %}#}
+{#             {% if user in  an.likes.all%}#}
+{#                  <a href="unlike_ans?ans_id={{ an.id }}&uid={{ user.id }}">Дизлойс</a>#}
+{#                 {% else %}#}
+{#                  <a href="like_ans?ans_id={{ an.id }}&uid={{ user.id }}">Лойс</a>#}
+{#             {% endif %}#}
+{#                {% if an.user_iduser == user %}#}
+{#                    <small><a href="delete_ans?id={{ an.id }}">   (✖) </a> </small>#}
+{#                 {% endif %}#}
+{#        {% endif %}#}
+{#    {% endfor %}#}
+{##}
+{##}
+{##}
+{#    {% if  user.is_authenticated  %}#}
+{#    <br>#}
+{#    <form action="details_add_answer" method="POST">{% csrf_token %}#}
+{#    <input type="text" name="content">#}
+{#        <input type = "hidden" name="qst_id" value="{{ obj.id }}">#}
+{#    <input type="submit" value="Додати відповідь">#}
+{#    </form>#}
+{#    {% else %}#}
+{#     <br> Щоб відповідати необхідно    <a href="login">увійти</a>.#}
+{#    {% endif %}#}
+{##}
+{#{% endblock %}#}
