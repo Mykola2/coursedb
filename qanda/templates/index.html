@@ -3,11 +3,87 @@
 Список питань
 {% endblock %}
 
-
 {% block main_content %}
 
-    {% for q in obj_list %}
-        <p> <a href="details?id={{ q.id }}"> {{ q.title  }} </a>    ({{ q.answers.all  | length }} відповідей)  </p> {# Возможно полная хуйня с количесвтом ответов #}
+            <div id="mainbar">
+                <div class="subheader">
+                    <h1 id="h-all-questions">Список питань</h1>
+                </div>
+                <div id="questions">
 
-    {% endfor %}
+                    <!-- This item must be iterated -->
+
+                    <!-- Item with author -->
+                    {% for q in obj_list %}
+                    <div class="question-summary" id="question-summary-27361268">
+                        <div class="statscontainer">
+                            <div class="statsarrow"></div>
+                            <div class="stats">
+                                <div class="vote">
+                                    <div class="votes">
+                                        <span class="vote-count-post"> <strong><!-- Votes count -->{{q.likes.all|length }}<!-- Votes count end --></strong></span>
+                                        <div class="viewcount">votes</div>
+                                    </div>
+                                </div>
+                                <div class="status unanswered"> <strong><!-- Answers count -->{{ q.answers.all  | length }}<!-- Answers count end --></strong> answers</div>
+                            </div>
+                            </div>
+                        <div class="summary">
+                           <h3>
+                                <a href="details?id={{ q.id }}" class="question-hyperlink">
+                                    <!-- Title of question -->{{ q.title }}<!-- Title of question end -->
+                                </a>
+                            </h3>
+                            <div class="excerpt">
+                                <!-- Question -->{{ q.content }}<!-- Question end -->
+                            </div>
+                            <!-- Tags -->
+                            <div class="tags t-android t-parseûcom t-parse-android-sdk">
+                                 {% for t in q.tags.all %}
+                                <a href="index?search_tag={{ t.id }}" class="post-tag" title="" rel="tag">{{ t.name }}</a>
+                                {% endfor %}
+                            </div>
+                            <!-- Tags end -->
+                            <div class="started fr">
+                                <div class="user-info ">
+                                    <div class="user-action-time">
+                                        asked
+                                        <span title="2014-12-08 15:29:33Z" class="relativetime"><!-- Time -->{{ q.postdate}}<!-- Time end --></span>
+                                    </div>
+                                    <div class="user-gravatar32">
+                                        <a href="index?search_by_user={{ q.user_iduser.id }}">
+                                            <div>
+                                                <img src="path_to_user_img.jpg" alt="" width="32" height="32"></div>
+                                        </a>
+                                    </div>
+                                    <div class="user-details">
+                                        <a href="index?search_by_user={{ q.user_iduser.id }}"><!-- Username -->{{ q.user_iduser.username }}<!-- Username end --></a>
+                                        <br>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
 {% endblock %}
+
+
+
+{#{% extends "base.html" %}#}
+{#{% block title_block %}#}
+{#Список питань#}
+{#{% endblock %}#}
+{##}
+{##}
+{#{% block main_content %}#}
+{##}
+{#    {% for q in obj_list %}#}
+{#        <p> <a href="details?id={{ q.id }}"> {{ q.title  }} </a>    ({{ q.answers.all  | length }} відповідей)  </p> {# Возможно полная хуйня с количесвтом ответов #}
+{##}
+{#    {% endfor %}#}
+{#{% endblock %}#}

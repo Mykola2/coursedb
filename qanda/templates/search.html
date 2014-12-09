@@ -9,8 +9,11 @@
     <input type="text" name="query">
     <input type="submit" value="Пошук!">
        <br> Або пергляньте популярні теги<br>
-        {% for t in poptags %}
-            <a href="index?search_tag={{ t.id }}" >{{ t.name }}</a>,
-        {% endfor %}
+                            <div class="tags t-android t-parseûcom t-parse-android-sdk">
+                                 {% for t in poptags %}
+                                <a href="index?search_tag={{ t.id }}" class="post-tag" title="" rel="tag">{{ t.name }}</a>
+                                {% endfor %}
+                            </div>
+
     </form>
 {% endblock %}
