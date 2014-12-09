@@ -47,6 +47,7 @@
                     </div>
 
                     <!-- Item with author -->
+                    {% for q in obj_list %}
                     <div class="question-summary" id="question-summary-27361268">
                         <div class="statscontainer">
                             <div class="statsarrow"></div>
@@ -98,6 +99,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
 
             </div>
@@ -106,16 +108,16 @@
 
 
 
-{% extends "base.html" %}
-{% block title_block %}
-Список питань
-{% endblock %}
-
-
-{% block main_content %}
-
-    {% for q in obj_list %}
-        <p> <a href="details?id={{ q.id }}"> {{ q.title  }} </a>    ({{ q.answers.all  | length }} відповідей)  </p> {# Возможно полная хуйня с количесвтом ответов #}
-
-    {% endfor %}
-{% endblock %}
+{#{% extends "base.html" %}#}
+{#{% block title_block %}#}
+{#Список питань#}
+{#{% endblock %}#}
+{##}
+{##}
+{#{% block main_content %}#}
+{##}
+{#    {% for q in obj_list %}#}
+{#        <p> <a href="details?id={{ q.id }}"> {{ q.title  }} </a>    ({{ q.answers.all  | length }} відповідей)  </p> {# Возможно полная хуйня с количесвтом ответов #}
+{##}
+{#    {% endfor %}#}
+{#{% endblock %}#}

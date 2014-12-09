@@ -170,5 +170,4 @@ def chart1(request,):
         else:
             unans+=1
     aua = [['answered', ans], ['unanswered', unans]]
-    print(aua)
     return render_to_response('chart1.html', {'taginfo': tvals, 'aua':aua}, context_instance=RequestContext(request))
