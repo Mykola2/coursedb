@@ -4,13 +4,80 @@
 {% endblock %}
 
 {% block main_content %}
-    <p>this is add.html</p>
-    <form action="add" method="post"> {% csrf_token %}
+<div id="mainbar" class="ask-mainbar">
+                <!-- Enter "action" > -->
+    <form id="post-form" class="post-form" action="add" method="post">{% csrf_token %}
+                    <div id="question-form">
+                        <div style="position: relative;">
+                            <div class="form-item ask-title">
+                                <table class="ask-title-table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="ask-title-cell-key">
+                                                <label for="title">Тема</label>
+                                            </td>
+                                            <td class="ask-title-cell-value">
+                                                <input type="text" maxlength="300" tabindex="100" class="actual-edit-overlay" data-min-length="15" data-max-length="150" autocomplete="off" style="opacity: 1; position: absolute; color: black; -webkit-text-fill-color: black; width: 610px; height: 15px; line-height: normal; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 13px; text-align: start; border: 1px solid rgb(153, 153, 153); background-color: white;" disabled="disabled">
+                                                <!-- Title > --><input id="title" name="title" type="text" maxlength="300" tabindex="100" class="ask-title-field edit-field-overlayed" data-min-length="15" data-max-length="150" autocomplete="off" style="opacity: 0.4; z-index: 1; position: relative;">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div id="question-suggestions"></div>
+                            </div>
+                        </div>
 
-        Заголовок : <input type="text" name="title"> <br>
-        Зміст питання : <input type="text" name="content" height="600" width="800"> <br>{# Размеры -  хуйня. подобрать нормальные #}
-        Теги (через кому) : <input type = "text" name = "tags"><br>
-        <input type = "submit" value="Запитати"><br>
+                        <div id="post-editor" class="post-editor">
 
-    </form>
+                            <div style="position: relative;">
+                                <div class="wmd-container">
+                                    <div style="clear: both; height: 24px;"></div>
+
+                                    <!-- Text > --> <textarea id="wmd-input" class="wmd-input processed" name="content" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+                                </div>
+                            </div>
+
+                            <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+                        </div>
+
+                        <div style="position: relative;">
+                            <div style="position: relative;">
+                                <div class="form-item">
+                                    <label>Теги (через кому) </label>
+                                    <div class="tag-editor edit-field-overlayed" style="width: 666px; height: 27px; opacity: 0.4; z-index: 1; position: relative;">
+                                        <span></span>
+                                        <input type = "text" name = "tags" tabindex="103" style="width: 658px;">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="question-only-section">
+                            <div class="form-submit cbt">
+                                <input id="submit-button" type="submit" value="Запитати" tabindex="120">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
 {% endblock %}
+
+
+{#{% extends "base.html" %}#}
+{#{% block title_block %}#}
+{#Запитати#}
+{#{% endblock %}#}
+{##}
+{#{% block main_content %}#}
+{#    <p>this is add.html</p>#}
+{#    <form action="add" method="post"> {% csrf_token %}#}
+{##}
+{#        Заголовок : <input type="text" name="title"> <br>#}
+{#        Зміст питання : <input type="text" name="content" height="600" width="800"> <br>{# Размеры -  хуйня. подобрать нормальные #}
+{#        Теги (через кому) : <input type = "text" name = "tags"><br>#}
+{#        <input type = "submit" value="Запитати"><br>#}
+{##}
+{#    </form>#}
+{#{% endblock %}#}
