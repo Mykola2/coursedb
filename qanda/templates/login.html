@@ -4,13 +4,28 @@
 {% endblock %}
 
 {% block main_content %}
-   <form id="login_form" method="post" action="/login/">
-            {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
-            <br />
-            Password: <input type="password" name="password" value="" size="50" />
-            <br />
+   <form id="login_form" method="post" action="login"> {% csrf_token %}
 
-            <input type="submit" value="submit" />
+           <div id="mainbar-full" class="login-page" data-login="true">
+    <div>
+             <!-- Title --><h2 class="title">Логін</h2>
+            <div id="se-login" class="preferred-login" style="overflow: hidden; height: 157px; width: 258px;">
+                <!-- Type link in "action" --><form id="se-login-form" action="login" method="POST">
+                    <div class="form-bottom">
+                        <div>
+                            <input name="username" placeholder="Логін" type="text" size="30" maxlength="100">
+                        </div>
+                        <div><input name="password" placeholder="Пароль" type="password" value=""></div>
+
+                        <div class="form-submit cbt">
+                            <input id="submit-button" name="submit-button" type="submit" value="Вхід">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+    </div>
+</div>
         </form>
 {% endblock %}
