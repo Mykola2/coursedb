@@ -4,111 +4,210 @@ obj.title
 {% endblock %}
 
 {% block main_content %}
-            <div id="mainbar">
-                <div class="subheader">
-                    <h1 id="h-all-questions">All Questions</h1>
+           <div itemscope="">
+                <link itemprop="image" href="//cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+                <div id="question-header">
+                    <h1 itemprop="name">
+                        <!-- Question title --><a href="" class="question-hyperlink">error: cannot find symbol method GetApplicationContext()</a>
+                    </h1>
                 </div>
-                <div id="questions">
+                <div id="mainbar">
 
-                    <!-- This item must be iterated -->
-                    <!-- Item without author -->
-                    <div class="question-summary" id="question-summary-27361269">
-                        <div class="statscontainer">
-                            <div class="statsarrow"></div>
-                            <div class="stats">
-                                <div class="vote">
-                                    <div class="votes">
-                                        <span class="vote-count-post"> <strong><!-- Votes count -->0<!-- Votes count end --></strong></span>
-                                        <div class="viewcount">votes</div>
-                                    </div>
-                                </div>
-                                <div class="status unanswered"> <strong><!-- Answers count -->0<!-- Answers count end --></strong> answers</div>
-                            </div>
-                            <div class="views " title="3 views"><!-- Views count -->3<!-- Views count --> views</div>
-                        </div>
-                        <div class="summary">
-                            <h3>
-                                <a href="" class="question-hyperlink">
-                                    <!-- Title of question -->Title<!-- Title of question end -->
-                                </a>
-                            </h3>
-                            <div class="excerpt">
-                                <!-- Question -->Question?<!-- Question end -->
-                            </div>
-                            <!-- Tags -->
-                            <div class="tags t-android t-parseûcom t-parse-android-sdk">
-                                <a href="" class="post-tag" title="" rel="tag">Tag 1</a>
-                                <a href="" class="post-tag" title="" rel="tag">Tag 2</a>
-                                <a href="" class="post-tag" title="" rel="tag">Tag 3</a>
-                            </div>
-                            <!-- Tags end -->
-                        </div>
+                    <div class="question" data-questionid="27363339" id="question">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="votecell">
+
+                                        <div class="vote">
+                                            <input type="hidden" name="_id_" value="27363339">
+                                            <!-- Vote up > --><a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+                                            <!-- Votes > --><span itemprop="upvoteCount" class="vote-count-post ">0</span>
+                                            <!-- Vote down > --><a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+
+                                            <div class="favoritecount"> <b></b>
+                                            </div>
+
+                                        </div>
+
+                                    </td>
+
+                                    <td class="postcell">
+                                        <div>
+                                            <div class="post-text" itemprop="text">
+                                                <!-- Question text -->
+                                                <p>
+                                                    I had this error: "error: cannot find symbol method GetApplicationContext()" when I'm creating Fragments for Android app.
+                                                </p>
+
+                                                <p></p>
+                                                <pre class="default prettyprint prettyprinted"><span class="kwd">public</span><span class="pln"></span><span class="kwd">class</span><span class="pln"></span><span class="typ">MainActivity</span><span class="pln"></span><span class="kwd">extends</span><span class="pln"></span><span class="typ">Activity</span><span class="pln"></span><span class="pun">{</span><p></p><span class="pln"></span><code><span class="lit">@Override</span><span class="pln"></span><span class="kwd">protected</span><span class="pln"></span><span class="kwd">void</span><span class="pln">onCreate</span><span class="pun">(</span><span class="typ">Bundle</span><span class="pln">savedInstanceState</span><span class="pun">)</span><span class="pln"></span><span class="pun">{</span><span class="pln"></span><span class="kwd">super</span><span class="pun">.</span><span class="pln">onCreate</span><span class="pun">(</span><span class="pln">savedInstanceState</span><span class="pun">);</span><span class="pln">setContentView</span><span class="pun">(</span><span class="pln">R</span><span class="pun">.</span><span class="pln">layout</span><span class="pun">.</span><span class="pln">activity_main</span><span class="pun">);</span><span class="pln"></span><span class="pun">}</span><span class="pln"></span><span class="kwd">public</span><span class="pln"></span><span class="kwd">void</span><span class="pln">simple</span><span class="pun">(</span><span class="typ">View</span><span class="pln">v</span><span class="pun">){</span><span class="pln"></span><span class="typ">Intent</span><span class="pln">intent </span><span class="pun">=</span><span class="pln"></span><span class="kwd">new</span><span class="pln"></span><span class="typ">Intent</span><span class="pun">(</span><span class="pln">intent</span><span class="pun">.</span><span class="typ">GetApplicationContext</span><span class="pun">(),</span><span class="pln"></span><span class="typ">SimpleFragmentActivity</span><span class="pun">.</span><span class="kwd">class</span><span class="pun">);</span><span class="pln">startActivity</span><span class="pun">(</span><span class="pln">intent</span><span class="pun">);</span><span class="pln"></span><span class="pun">}</span></code></pre>
+
+                                                <p>}</p>
+
+                                                <p></p>
+                                                <!-- Question text end -->
+                                            </div>
+                                            <div class="post-taglist">
+                                                <!-- Tags -->
+                                                <a href="" class="post-tag js-gps-track" title="" rel="tag">android</a>
+                                                <a href="" class="post-tag js-gps-track" title="" rel="tag">cannot-find-symbol</a>
+                                                <!-- Tags end -->
+                                            </div>
+                                            <table class="fw">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="vt">
+                                                            <div class="post-menu">
+                                                            </div>
+                                                        </td>
+                                                        <td class="post-signature owner">
+                                                            <div class="user-info ">
+                                                                <div class="user-action-time">
+                                                                    asked
+                                                                    <span title="2014-12-08 17:20:06Z" class="relativetime">3 mins ago</span>
+                                                                </div>
+                                                                <div class="user-gravatar32">
+                                                                    <a href="link_to_user">
+                                                                        <div>
+                                                                            <img src="path_to_user_avatar.jpg" alt="" width="32" height="32"></div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="user-details">
+                                                                    <!-- Username and link --><a href="link_to_user">robigroza</a>
+                                                                    <br>
+                                                                    <span class="reputation-score" title="reputation score " dir="ltr">1</span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="votecell"></td>
+                                    <td>
+                                        <div id="comments-link-27363339" data-rep="50" data-reg="true">
+                                            <span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+                                            <a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <!-- Item with author -->
-                    <div class="question-summary" id="question-summary-27361268">
-                        <div class="statscontainer">
-                            <div class="statsarrow"></div>
-                            <div class="stats">
-                                <div class="vote">
-                                    <div class="votes">
-                                        <span class="vote-count-post"> <strong><!-- Votes count -->0<!-- Votes count end --></strong></span>
-                                        <div class="viewcount">votes</div>
-                                    </div>
-                                </div>
-                                <div class="status unanswered"> <strong><!-- Answers count -->0<!-- Answers count end --></strong> answers</div>
-                            </div>
-                            <div class="views " title="3 views"><!-- Views count -->3<!-- Views count --> views</div>
-                        </div>
-                        <div class="summary">
-                           <h3>
-                                <a href="" class="question-hyperlink">
-                                    <!-- Title of question -->Title<!-- Title of question end -->
-                                </a>
-                            </h3>
-                            <div class="excerpt">
-                                <!-- Question -->Question?<!-- Question end -->
-                            </div>
-                            <!-- Tags -->
-                            <div class="tags t-android t-parseûcom t-parse-android-sdk">
-                                <a href="" class="post-tag" title="" rel="tag">Tag 1</a>
-                                <a href="" class="post-tag" title="" rel="tag">Tag 2</a>
-                                <a href="" class="post-tag" title="" rel="tag">Tag 3</a>
-                            </div>
-                            <!-- Tags end -->
-                            <div class="started fr">
-                                <div class="user-info ">
-                                    <div class="user-action-time">
-                                        asked
-                                        <span title="2014-12-08 15:29:33Z" class="relativetime"><!-- Time -->39 secs ago<!-- Time end --></span>
-                                    </div>
-                                    <div class="user-gravatar32">
-                                        <a href="link_to_user">
-                                            <div>
-                                                <img src="path_to_user_img.jpg" alt="" width="32" height="32"></div>
-                                        </a>
-                                    </div>
-                                    <div class="user-details">
-                                        <a href="link_to_user"><!-- Username -->User<!-- Username end --></a>
-                                        <br>
-                                        <span class="reputation-score" title="reputation score " dir="ltr"><!-- Reputation -->47<!-- Reputation end --></span>
-                                    </div>
-                                </div>
+                    <div id="answers">
+
+                        <a name="tab-top"></a>
+                        <div id="answers-header">
+                            <div class="subheader answers-subheader">
+                                <h2>
+                                    1 Answer
+                                    <span style="display:none;" itemprop="answerCount">1</span>
+                                </h2>
                             </div>
                         </div>
+
+                        <!-- Iterable item -->
+                        <div class="answer" itemscope="">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="votecell">
+
+                                            <div class="vote">
+                                                <!-- Vote up > --><a class="vote-up-off" title="This answer is useful">up vote</a>
+                                                <!-- Votes > --><span itemprop="upvoteCount" class="vote-count-post ">0</span>
+                                                <!-- Vote down > --><a class="vote-down-off" title="This answer is not useful">down vote</a>
+                                            </div>
+                                        </td>
+
+                                        <td class="answercell">
+                                            <div class="post-text" itemprop="text">
+                                                <pre class="default prettyprint prettyprinted"><code><span class="pln">intent</span><span class="pun">.</span><span class="typ">GetApplicationContext</span><span class="pun">()</span></code></pre>
+                                                <p>
+                                                    <code>getApplicationContext</code>
+                                                    is not a method of the Intent class but of context.
+                                                </p>
+                                            </div>
+                                            <table class="fw">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="vt">
+                                                            <div class="post-menu">
+                                                            </div>
+                                                        </td>
+                                                        <td align="right" class="post-signature">
+                                                            <div class="user-info user-hover">
+                                                                <div class="user-action-time">
+                                                                    answered
+                                                                    <span title="2014-12-08 17:21:40Z" class="relativetime">1 min ago</span>
+                                                                </div>
+                                                                <div class="user-gravatar32">
+                                                                    <a href="link_to_user">
+                                                                        <div class="gravatar-wrapper-32">
+                                                                            <img src="path_to_user_avatar.jpg" alt="" width="32" height="32"></div>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="user-details">
+                                                                    <!-- Username and link > --><a href="link_to_user">Blackbelt</a>
+                                                                    <br>
+                                                                    <span class="reputation-score" title="reputation score 48449" dir="ltr">48.4k</span>
+                                                                    <span title="10 gold badges">
+                                                                        <span class="badge1"></span>
+                                                                        <span class="badgecount">10</span>
+                                                                    </span>
+                                                                    <span title="50 silver badges">
+                                                                        <span class="badge2"></span>
+                                                                        <span class="badgecount">50</span>
+                                                                    </span>
+                                                                    <span title="93 bronze badges">
+                                                                        <span class="badge3"></span>
+                                                                        <span class="badgecount">93</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="votecell"></td>
+                                        <td>
+                                            <div id="comments-link" data-rep="50" data-reg="true">
+                                                <span class="js-link-separator dno">&nbsp;|&nbsp;</span>
+                                                <a class="js-show-link comments-link dno" title="expand to show all comments on this post, or add one of your own" href="#" onclick=""></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <a name="new-answer"></a>
+                        <!-- Enter "action" > --><form id="post-form" action="link_to_executor" method="post" class="post-form">
+                            <h2 class="space">Your Answer</h2>
+                            <div id="post-editor" class="post-editor">
+                                <div style="position: relative;">
+                                    <div class="wmd-container">
+                                        <!-- Text > --><textarea id="wmd-input" class="wmd-input processed" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-submit cbt">
+                                <input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+                            </div>
+                        </form>
+
                     </div>
                 </div>
-                <div class="pager fl">
-                    <!-- Pages -->
-                    <span class="page-numbers current">1</span>
-                    <a href="link_to_second_page" title="go to page 2">
-                        <span class="page-numbers">2</span>
-                    </a>
-                    <a href="link_to_next_page" rel="next" title="go to page 2">
-                        <span class="page-numbers next">next</span>
-                    </a>
-                    <!-- Pages end -->
-                </div>
+                <div style="display:none" id="prettify-lang">default</div>
             </div>
 {% endblock %}
 
