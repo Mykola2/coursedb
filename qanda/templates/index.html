@@ -12,39 +12,6 @@
                 <div id="questions">
 
                     <!-- This item must be iterated -->
-                    <!-- Item without author -->
-                    <div class="question-summary" id="question-summary-27361269">
-                        <div class="statscontainer">
-                            <div class="statsarrow"></div>
-                            <div class="stats">
-                                <div class="vote">
-                                    <div class="votes">
-                                        <span class="vote-count-post"> <strong><!-- Votes count -->0<!-- Votes count end --></strong></span>
-                                        <div class="viewcount">votes</div>
-                                    </div>
-                                </div>
-                                <div class="status unanswered"> <strong><!-- Answers count -->0<!-- Answers count end --></strong> answers</div>
-                            </div>
-                            <div class="views " title="3 views"><!-- Views count -->3<!-- Views count --> views</div>
-                        </div>
-                        <div class="summary">
-                            <h3>
-                                <a href="" class="question-hyperlink">
-                                    <!-- Title of question -->Title<!-- Title of question end -->
-                                </a>
-                            </h3>
-                            <div class="excerpt">
-                                <!-- Question -->Question?<!-- Question end -->
-                            </div>
-                            <!-- Tags -->
-                            <div class="tags t-android t-parseûcom t-parse-android-sdk">
-                                <a href="" class="post-tag" title="" rel="tag">Tag 1</a>
-                                <a href="" class="post-tag" title="" rel="tag">Tag 2</a>
-                                <a href="" class="post-tag" title="" rel="tag">Tag 3</a>
-                            </div>
-                            <!-- Tags end -->
-                        </div>
-                    </div>
 
                     <!-- Item with author -->
                     {% for q in obj_list %}
@@ -54,46 +21,45 @@
                             <div class="stats">
                                 <div class="vote">
                                     <div class="votes">
-                                        <span class="vote-count-post"> <strong><!-- Votes count -->0<!-- Votes count end --></strong></span>
+                                        <span class="vote-count-post"> <strong><!-- Votes count -->{{q.likes.all|length }}<!-- Votes count end --></strong></span>
                                         <div class="viewcount">votes</div>
                                     </div>
                                 </div>
-                                <div class="status unanswered"> <strong><!-- Answers count -->0<!-- Answers count end --></strong> answers</div>
+                                <div class="status unanswered"> <strong><!-- Answers count -->{{ q.answers.all  | length }}<!-- Answers count end --></strong> answers</div>
                             </div>
-                            <div class="views " title="3 views"><!-- Views count -->3<!-- Views count --> views</div>
-                        </div>
+                            </div>
                         <div class="summary">
                            <h3>
-                                <a href="" class="question-hyperlink">
-                                    <!-- Title of question -->Title<!-- Title of question end -->
+                                <a href="details?id={{ q.id }}" class="question-hyperlink">
+                                    <!-- Title of question -->{{ q.title }}<!-- Title of question end -->
                                 </a>
                             </h3>
                             <div class="excerpt">
-                                <!-- Question -->Question?<!-- Question end -->
+                                <!-- Question -->{{ q.content }}<!-- Question end -->
                             </div>
                             <!-- Tags -->
                             <div class="tags t-android t-parseûcom t-parse-android-sdk">
-                                <a href="" class="post-tag" title="" rel="tag">Tag 1</a>
-                                <a href="" class="post-tag" title="" rel="tag">Tag 2</a>
-                                <a href="" class="post-tag" title="" rel="tag">Tag 3</a>
+                                 {% for t in q.tags.all %}
+                                <a href="index?search_tag={{ t.id }}" class="post-tag" title="" rel="tag">{{ t.name }}</a>
+                                {% endfor %}
                             </div>
                             <!-- Tags end -->
                             <div class="started fr">
                                 <div class="user-info ">
                                     <div class="user-action-time">
                                         asked
-                                        <span title="2014-12-08 15:29:33Z" class="relativetime"><!-- Time -->39 secs ago<!-- Time end --></span>
+                                        <span title="2014-12-08 15:29:33Z" class="relativetime"><!-- Time -->{{ q.postdate}}<!-- Time end --></span>
                                     </div>
                                     <div class="user-gravatar32">
-                                        <a href="link_to_user">
+                                        <a href="index?search_by_user={{ q.user_iduser.id }}">
                                             <div>
                                                 <img src="path_to_user_img.jpg" alt="" width="32" height="32"></div>
                                         </a>
                                     </div>
                                     <div class="user-details">
-                                        <a href="link_to_user"><!-- Username -->User<!-- Username end --></a>
+                                        <a href="index?search_by_user={{ q.user_iduser.id }}"><!-- Username -->{{ q.user_iduser.username }}<!-- Username end --></a>
                                         <br>
-                                        <span class="reputation-score" title="reputation score " dir="ltr"><!-- Reputation -->47<!-- Reputation end --></span>
+
                                     </div>
                                 </div>
                             </div>
